@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Truly Sorry</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .floating-bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background: linear-gradient(to bottom right, #ffffff, #f9f9f9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin: 40px 0;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            border-left: 5px solid #8e44ad;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, rgba(142, 68, 173, 0.05), rgba(41, 128, 185, 0.05), rgba(142, 68, 173, 0.05));
+            transform: rotate(45deg);
+            z-index: -1;
+            animation: shimmer 8s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-50%) rotate(45deg); }
+            100% { transform: translateX(50%) rotate(45deg); }
+        }
+        
+        h1 {
+            color: #8e44ad;
+            margin-bottom: 25px;
+            font-size: 2.8rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, #8e44ad, #3498db);
+            animation: expand 2s ease-in-out infinite;
+        }
+        
+        @keyframes expand {
+            0%, 100% { width: 50%; left: 25%; }
+            50% { width: 70%; left: 15%; }
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-align: left;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .message p:first-child {
+            font-weight: bold;
+            color: #3498db;
+            font-size: 1.4rem;
+        }
+        
+        .namaste-container {
+            position: relative;
+            height: 150px;
+            margin: 30px 0;
+        }
+        
+        .namaste {
+            color: #8e44ad;
+            font-size: 5rem;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .mini-namaste {
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: float-up 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        @keyframes float-up {
+            0% { transform: translateY(0); opacity: 0; }
+            25% { opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #555;
+            margin: 30px 0;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            background: linear-gradient(to right, rgba(236, 240, 241, 0.8), rgba(249, 249, 249, 0.8));
+            text-align: left;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quote::after {
+            content: """;
+            position: absolute;
+            bottom: -20px;
+            right: 10px;
+            font-size: 6rem;
+            color: rgba(0,0,0,0.05);
+            font-family: Georgia, serif;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            font-size: 1rem;
+            color: #555;
+            position: relative;
+            padding-top: 20px;
+        }
+        
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 25%;
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(0,0,0,0.1), transparent);
+        }
+        
+        .highlight {
+            color: #8e44ad;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: rgba(142, 68, 173, 0.3);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Animation delays for fade-in elements */
+        .delay-1 { animation-delay: 0.3s; }
+        .delay-2 { animation-delay: 0.6s; }
+        .delay-3 { animation-delay: 0.9s; }
+        .delay-4 { animation-delay: 1.2s; }
+        .delay-5 { animation-delay: 1.5s; }
+    </style>
+</head>
+<body>
+    <!-- Create floating bubbles -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            for (let i = 0; i < 15; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'floating-bubble';
+                
+                // Random size between 20px and 80px
+                const size = Math.floor(Math.random() * 60) + 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // Random position
+                const posX = Math.floor(Math.random() * 100);
+                const posY = Math.floor(Math.random() * 100) + 100;
+                bubble.style.left = `${posX}%`;
+                bubble.style.top = `${posY}%`;
+                
+                // Random animation duration
+                const duration = Math.floor(Math.random() * 10) + 10;
+                bubble.style.animationDuration = `${duration}s`;
+                
+                // Random delay
+                const delay = Math.floor(Math.random() * 10);
+                bubble.style.animationDelay = `${delay}s`;
+                
+                document.body.appendChild(bubble);
+            }
+            
+            // Create mini namaste animation
+            const namasteContainer = document.querySelector('.namaste-container');
+            for (let i = 0; i < 10; i++) {
+                const miniNamaste = document.createElement('div');
+                miniNamaste.className = 'mini-namaste';
+                miniNamaste.innerHTML = '🙏';
+                
+                // Random position
+                const posX = 50 + Math.floor(Math.random() * 60) - 30;
+                miniNamaste.style.left = `${posX}%`;
+                miniNamaste.style.bottom = '10%';
+                
+                // Random animation duration and delay
+                const duration = Math.floor(Math.random() * 2) + 2;
+                const delay = Math.floor(Math.random() * 3);
+                miniNamaste.style.animationDuration = `${duration}s`;
+                miniNamaste.style.animationDelay = `${delay}s`;
+                
+                namasteContainer.appendChild(miniNamaste);
+            }
+        });
+    </script>
+
+    <div class="container">
+        <h1 class="fade-in">I'm Truly Sorry</h1>
+        
+        <div class="namaste-container fade-in delay-1">
+            <div class="namaste">🙏</div>
+            <!-- Mini namaste will be added via JavaScript -->
+        </div>
+        
+        <div class="message">
+            <p class="fade-in delay-1">Dear Friend,</p>
+            
+            <p class="fade-in delay-2">I owe you a sincere and heartfelt apology. When you told me about not feeling well, I didn't take you seriously. I mistakenly thought you were just making an excuse to skip school, and I even joked about it. That was thoughtless and <span class="highlight">inconsiderate</span> of me.</p>
+            
+            <p class="fade-in delay-3">I now understand that you had an <span class="highlight">asthma attack</span> - something serious that should never be dismissed or taken lightly. Asthma attacks can be frightening and dangerous, and instead of supporting you during a difficult time, I added to your distress with my insensitivity.</p>
+            
+            <p class="fade-in delay-4">I created this website not just as a creative way to say sorry, but to show you how much our <span class="highlight">friendship means to me</span> and how deeply I regret hurting you. My words and actions were wrong, and you deserve better from a friend.</p>
+            
+            <p class="fade-in delay-5">I hope you're feeling better now, and I want you to know that I'm here for you - to listen, to support, and to be the kind of friend you deserve.</p>
+        </div>
+        
+        <div class="quote fade-in delay-5">
+            "True friendship isn't about being there when it's convenient; it's about being there when it's not."
+        </div>
+        
+        <p class="fade-in delay-5">I promise to be more understanding, more supportive, and a better listener from now on.</p>
+        
+        <p class="footer fade-in delay-5">From your friend who is truly sorry and cares about you.</p>
+    </div>
+</body>
+</html>
